@@ -1,0 +1,27 @@
+{
+	"folders": [
+		
+		{
+			"path": "../apps/NightLight"
+		},
+		{
+			"path": "../apps/ColorduinoTwiServer"
+		},
+		{
+			"path": "../apps/SketchRgbScreen"
+		},
+		{
+			"path": "../apps/SketchColorduino"
+		},
+		{
+			"path": "../libs/common"
+		},
+		{
+			"path": "../libs/arduino"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

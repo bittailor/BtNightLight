@@ -1,0 +1,9 @@
+{
+    "name": "BtCore_Arduino",
+    "frameworks": "*",
+    "platforms": "arduino",
+    "dependencies": [
+        { "name": "BtCore",  "version": "*"},
+        { "name": "Wire",  "version": "*"}
+    ]
+}
