@@ -23,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-   uint8_t address = 2;
+   uint8_t address = 3;
    uint8_t dimmFactor = 32;
 
    Bt::Ui::Color red   (255,  0,  0);
@@ -32,25 +32,26 @@ void loop() {
    Bt::Ui::Color black (  0,  0,  0);
 
    Bt::Ui::Colorduino colorduino(1);
-   colorduino.fill(red.dimm(dimmFactor));
+   colorduino.fill(black);
    colorduino.repaint();
    Bt::Ui::RgbScreenServer server(colorduino);
-   colorduino.fill(orange.dimm(dimmFactor));
-   colorduino.repaint();
-   
    Bt::Com::Twi twi;
    Bt::Com::TwoWireServer<Bt::Com::Twi> twiServer(twi,address,server);
 
-   // show the address of this colorduino
+   for(int y = 0 ; y < colorduino.height() ; y++ ) {
+      for(int x = 0 ; x < colorduino.width() ; x++ ) {
+         colorduino.fill(black);
+         colorduino.setPixel(x,y,red.dimm(dimmFactor));
+         colorduino.repaint();
+         delay(10);   
+      }
+   }
+   
    colorduino.fill(black);
    drawAddress(address,colorduino,green.dimm(dimmFactor));
    colorduino.repaint();
 
-   delay(address * 1000);
-   Serial.print("Startup Colodruino Firmware [");Serial.print(address);Serial.println("]");
-
-   // colorduino and communication is interrupt driven
    while(true) {
-      delay(100);   
+      delay(1000);
    }
 }

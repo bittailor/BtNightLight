@@ -116,27 +116,39 @@ int main() {
 
    // I2C slaves
    Bt::Com::Twi twi;
+   Serial.println("twi0");
    Bt::Com::TwoWireClient<Bt::Com::Twi> server1(twi,1);
+   Serial.println("twi1");
    Bt::Com::TwoWireClient<Bt::Com::Twi> server2(twi,2);
+   Serial.println("twi2");
    Bt::Com::TwoWireClient<Bt::Com::Twi> server3(twi,3);
+   Serial.println("twi3");
    Bt::Com::TwoWireClient<Bt::Com::Twi> server4(twi,4);
+   Serial.println("twi4");
 
 
    // I2C led matrix proxies
    Bt::Ui::RgbScreenProxy proxy1(server1);
+   Serial.println("proxy1");
    Bt::Ui::RgbScreenProxy proxy2(server2);
+   Serial.println("proxy2");
    Bt::Ui::RgbScreenProxy proxy3(server3);
+   Serial.println("proxy3");
    Bt::Ui::RgbScreenProxy proxy4(server4);
+   Serial.println("proxy4");
 
    // Combine led matrixes to compund screen
    Bt::Util::Vector<Bt::Ui::CompoundRgbScreen,1> screen;
+   Serial.println("rgb1");
    {
       Bt::Util::StaticMatrix<Bt::Ui::I_RgbScreen*,2,2> screens;
+      Serial.println("rgb2");
       screens(0,0) = &proxy1;
       screens(0,1) = &proxy2;
       screens(1,0) = &proxy3;
       screens(1,1) = &proxy4;
       screen.pushBack<Bt::Util::I_Matrix<Bt::Ui::I_RgbScreen*>&>(screens);
+      Serial.println("rgb3");
    }
    Serial.println("s1");
 

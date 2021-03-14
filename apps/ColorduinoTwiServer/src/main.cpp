@@ -23,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-   uint8_t address = 2;
+   uint8_t address = 4;
    uint8_t dimmFactor = 32;
 
    Bt::Ui::Color red   (255,  0,  0);

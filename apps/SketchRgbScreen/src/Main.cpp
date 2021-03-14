@@ -119,18 +119,68 @@ void loop() {
    Bt::Com::Twi twi;
    Bt::Com::TwoWireClient<Bt::Com::Twi> server1(twi,1);
    Bt::Com::TwoWireClient<Bt::Com::Twi> server2(twi,2);
+   Bt::Com::TwoWireClient<Bt::Com::Twi> server3(twi,3);
+   Bt::Com::TwoWireClient<Bt::Com::Twi> server4(twi,4);
    
 
    // I2C led matrix proxies
    Bt::Ui::RgbScreenProxy proxy1(server1);
    Bt::Ui::RgbScreenProxy proxy2(server2);
+   Bt::Ui::RgbScreenProxy proxy3(server3);
+   Bt::Ui::RgbScreenProxy proxy4(server4);
+
+   {
+      auto wb = proxy1.whiteBalance(0);
+      Serial.print("wb1 => r=");
+      Serial.print(wb.red());
+      Serial.print(" g=");
+      Serial.print(wb.green());
+      Serial.print(" blue=");
+      Serial.println(wb.blue());
+   }
+   {
+      auto wb = proxy2.whiteBalance(0);
+      Serial.print("wb2 => r=");
+      Serial.print(wb.red());
+      Serial.print(" g=");
+      Serial.print(wb.green());
+      Serial.print(" blue=");
+      Serial.println(wb.blue());
+   }
+   {
+      auto wb = proxy3.whiteBalance(0);
+      Serial.print("wb3 => r=");
+      Serial.print(wb.red());
+      Serial.print(" g=");
+      Serial.print(wb.green());
+      Serial.print(" blue=");
+      Serial.println(wb.blue());
+   }
+   {
+      auto wb = proxy4.whiteBalance(0);
+      Serial.print("wb4 => r=");
+      Serial.print(wb.red());
+      Serial.print(" g=");
+      Serial.print(wb.green());
+      Serial.print(" blue=");
+      Serial.println(wb.blue());
+   }
+   
+   proxy1.setWhiteBalance(Bt::Ui::Color(35,63,46),0);
+   proxy2.setWhiteBalance(Bt::Ui::Color(35,63,46),0);
+
+   proxy1.persistWhiteBalance(0);
+   proxy2.persistWhiteBalance(0);
+   
    
    // Combine led matrixes to compund screen
    Bt::Util::Vector<Bt::Ui::CompoundRgbScreen,1> screen;
    {
-      Bt::Util::StaticMatrix<Bt::Ui::I_RgbScreen*,1,2> screens;
+      Bt::Util::StaticMatrix<Bt::Ui::I_RgbScreen*,2,2> screens;
       screens(0,0) = &proxy1;
       screens(0,1) = &proxy2;
+      screens(1,0) = &proxy3;
+      screens(1,1) = &proxy4;
       screen.pushBack<Bt::Util::I_Matrix<Bt::Ui::I_RgbScreen*>&>(screens);
    }
    Serial.println("s1");
